@@ -13,8 +13,8 @@ services:
       MYSQL_PASSWORD: wordpress_pass
     volumes:
       - ./_build/db_data:/var/lib/mysql
-    networks:
-      - vk4wip-network
+    ports:
+      - 3306:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pwordpress_root_pass"]
       interval: 10s
