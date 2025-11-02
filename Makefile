@@ -1,7 +1,7 @@
 # VK4WIP WordPress Theme - Development Makefile
 # Quick commands for Docker development environment
 
-.PHONY: help start stop restart logs clean install theme-activate plugin-install db-backup db-restore shell wp
+.PHONY: help start stop restart logs clean install init test-init dev-helpers wpcli-shell theme-activate plugin-install db-backup db-restore shell wp
 
 # Default target
 .DEFAULT_GOAL := help
@@ -61,9 +61,23 @@ clean: ## Stop and remove all containers, volumes, and data (⚠️  DESTRUCTIVE
 		echo "$(BLUE)Cancelled.$(NC)"; \
 	fi
 
-install: ## Run initial WordPress installation
+install: ## Run initial WordPress installation (legacy - use 'make init' instead)
 	@echo "$(GREEN)📦 Installing WordPress...$(NC)"
 	@./docker-setup.sh
+
+init: ## Initialize WordPress inside container (recommended)
+	@echo "$(GREEN)🚀 Initializing WordPress inside container...$(NC)"
+	@docker exec vk4wip-wpcli /scripts/init-wordpress.sh
+
+test-init: ## Test WordPress initialization
+	@echo "$(GREEN)🧪 Testing WordPress initialization...$(NC)"
+	@docker exec vk4wip-wpcli /scripts/test-init.sh
+
+dev-helpers: ## Show development helper commands
+	@docker exec vk4wip-wpcli /scripts/dev-helpers.sh
+
+wpcli-shell: ## Open shell in wpcli container
+	@docker exec -it vk4wip-wpcli sh
 
 theme-activate: ## Activate VK4WIP theme
 	@echo "$(GREEN)🎨 Activating VK4WIP theme...$(NC)"

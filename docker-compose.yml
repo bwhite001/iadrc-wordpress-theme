@@ -12,7 +12,7 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress_pass
     volumes:
-      - db_data:/var/lib/mysql
+      - _build/db_data:/var/lib/mysql
     networks:
       - vk4wip-network
     healthcheck:
@@ -47,9 +47,9 @@ services:
       # Mount theme directory
       - ./vk4wip-theme:/var/www/html/wp-content/themes/vk4wip-theme
       # Mount WordPress data (persistent)
-      - wordpress_data:/var/www/html
+      -  _build/wordpress_data:/var/www/html
       # Mount uploads (persistent)
-      - wordpress_uploads:/var/www/html/wp-content/uploads
+      -  _build/wordpress_uploads:/var/www/html/wp-content/uploads
     networks:
       - vk4wip-network
     healthcheck:
@@ -84,25 +84,20 @@ services:
         condition: service_healthy
     volumes:
       - ./vk4wip-theme:/var/www/html/wp-content/themes/vk4wip-theme
-      - wordpress_data:/var/www/html
+      - _build/wordpress_data:/var/www/html
+      - ./docker/scripts:/scripts:ro
+      - _build/wpcli_cache:/var/www/.wp-cli/cache
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_pass
       WORDPRESS_DB_NAME: wordpress
+      HOME: /var/www
     networks:
       - vk4wip-network
     user: "33:33"  # www-data user
-    entrypoint: wp
-    command: --info
-
-volumes:
-  db_data:
-    name: vk4wip_db_data
-  wordpress_data:
-    name: vk4wip_wordpress_data
-  wordpress_uploads:
-    name: vk4wip_wordpress_uploads
+    entrypoint: ["sh", "-c"]
+    command: ["tail -f /dev/null"]
 
 networks:
   vk4wip-network:
