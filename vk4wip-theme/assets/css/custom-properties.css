@@ -1,0 +1,292 @@
+/**
+ * VK4WIP Theme - CSS Custom Properties
+ * Design tokens for colors, typography, spacing, and shadows
+ *
+ * @package VK4WIP_Theme
+ * @since 1.0.0
+ */
+
+:root {
+    /* ========= BRAND COLORS ========= */
+    --brand-blue: #1E5CB3;
+    --brand-navy: #0B2D53;
+    --brand-red: #E53935;
+    --brand-gold: #F4C542;
+    
+    /* ========= NEUTRAL PALETTE ========= */
+    --ink: #222A35;
+    --muted: #6B778C;
+    --paper: #F7F8FB;
+    --white: #fff;
+    --border: #E0E6F0;
+    
+    /* ========= SHADOWS ========= */
+    --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --shadow-2: 0 10px 30px rgba(0, 0, 0, 0.18);
+    
+    /* ========= TYPOGRAPHY ========= */
+    --font-primary: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-heading: Montserrat, sans-serif;
+    
+    /* ========= SPACING ========= */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    
+    /* ========= BORDER RADIUS ========= */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 14px;
+    
+    /* ========= TRANSITIONS ========= */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* ========= LAYOUT ========= */
+    --wrapper-max-width: 1200px;
+    --wrapper-padding: clamp(16px, 3vw, 32px);
+    
+    /* ========= BREAKPOINTS (for reference in media queries) ========= */
+    /* Use these values in @media queries */
+    /* --breakpoint-mobile: 720px; */
+    /* --breakpoint-tablet: 980px; */
+    /* --breakpoint-desktop: 1200px; */
+}
+
+/* ========= BASE RESETS & GLOBAL STYLES ========= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-primary);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+}
+
+/* ========= UTILITY CLASSES ========= */
+
+.full-width {
+    width: 100%;
+}
+
+.wrapper {
+    max-width: var(--wrapper-max-width);
+    margin: 0 auto;
+    padding-inline: var(--wrapper-padding);
+}
+
+/* ========= TYPOGRAPHY UTILITIES ========= */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: clamp(32px, 5vw, 48px);
+}
+
+h2 {
+    font-size: clamp(24px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(20px, 3vw, 28px);
+}
+
+h4 {
+    font-size: clamp(18px, 2.5vw, 24px);
+}
+
+/* ========= LINK STYLES ========= */
+
+a {
+    color: var(--brand-blue);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus {
+    color: var(--brand-navy);
+}
+
+/* ========= BUTTON BASE STYLES ========= */
+
+.btn,
+.link-btn {
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
+    display: inline-block;
+    transition: all var(--transition-base);
+    font-family: var(--font-heading);
+}
+
+.btn:hover,
+.link-btn:hover {
+    filter: brightness(0.96);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-2);
+}
+
+.btn-gold,
+.link-btn {
+    background: var(--brand-gold);
+    color: #1E1E1E;
+}
+
+.btn-red {
+    background: var(--brand-red);
+    color: var(--white);
+}
+
+.btn-blue {
+    background: var(--brand-blue);
+    color: var(--white);
+}
+
+.link-btn--outline {
+    background: transparent;
+    color: var(--brand-blue);
+    border: 2px solid var(--brand-blue);
+}
+
+.link-btn--outline:hover {
+    background: var(--brand-blue);
+    color: var(--white);
+}
+
+/* ========= SECTION STYLES ========= */
+
+.section {
+    padding-block: clamp(28px, 5vw, 56px);
+}
+
+.section-hd {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 10px;
+    font-size: clamp(22px, 3vw, 28px);
+}
+
+.section-kicker {
+    color: var(--muted);
+    margin: 0 0 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-size: 0.95rem;
+}
+
+.band {
+    background: #EEF3FA;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+/* ========= CARD BASE STYLES ========= */
+
+.card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(16px, 2.2vw, 24px);
+    box-shadow: var(--shadow-1);
+    transition: box-shadow var(--transition-base);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-2);
+}
+
+/* ========= GRID UTILITIES ========= */
+
+.twocol {
+    display: grid;
+    gap: clamp(20px, 3.5vw, 40px);
+    grid-template-columns: 1fr 1fr;
+}
+
+.content-two-col {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(20px, 3vw, 40px);
+}
+
+/* ========= ACCESSIBILITY ========= */
+
+.screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.screen-reader-text:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    clip: auto;
+}
+
+/* ========= WORDPRESS ALIGNMENT CLASSES ========= */
+
+.alignright {
+    float: right;
+    margin-left: 1.5em;
+}
+
+.alignleft {
+    float: left;
+    margin-right: 1.5em;
+}
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========= IMAGE STYLES ========= */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.featured-image {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
+}

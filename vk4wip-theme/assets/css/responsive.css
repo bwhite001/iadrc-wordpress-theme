@@ -1,0 +1,432 @@
+/**
+ * VK4WIP Theme - Responsive Styles
+ * Media queries and responsive adjustments
+ *
+ * @package VK4WIP_Theme
+ * @since 1.0.0
+ */
+
+/* ========= LARGE DESKTOP (1400px+) ========= */
+
+@media (min-width: 1400px) {
+    .wrapper {
+        max-width: 1320px;
+    }
+}
+
+/* ========= DESKTOP (1200px - 1399px) ========= */
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .wrapper {
+        max-width: 1140px;
+    }
+}
+
+/* ========= TABLET LANDSCAPE (980px - 1199px) ========= */
+
+@media (max-width: 1199px) {
+    body {
+        font-size: 15px;
+    }
+    
+    h1 {
+        font-size: clamp(28px, 4.5vw, 42px);
+    }
+    
+    h2 {
+        font-size: clamp(22px, 3.5vw, 32px);
+    }
+    
+    h3 {
+        font-size: clamp(18px, 2.8vw, 24px);
+    }
+}
+
+/* ========= TABLET PORTRAIT (768px - 979px) ========= */
+
+@media (max-width: 979px) {
+    /* Layout adjustments */
+    .site-content {
+        flex-direction: column;
+    }
+    
+    .content-area,
+    .widget-area {
+        flex: 100%;
+        max-width: 100%;
+    }
+    
+    .widget-area {
+        margin-right: 0;
+        margin-top: 20px;
+    }
+    
+    /* Grid adjustments */
+    .twocol,
+    .content-two-col {
+        grid-template-columns: 1fr;
+        gap: clamp(16px, 3vw, 24px);
+    }
+    
+    /* Section spacing */
+    .section {
+        padding-block: clamp(24px, 4vw, 40px);
+    }
+    
+    /* Button adjustments */
+    .btn,
+    .link-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+/* ========= MOBILE LANDSCAPE (721px - 767px) ========= */
+
+@media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+    
+    /* Wrapper padding */
+    .wrapper {
+        padding-inline: clamp(12px, 2.5vw, 20px);
+    }
+    
+    /* Typography */
+    h1 {
+        font-size: clamp(24px, 6vw, 36px);
+    }
+    
+    h2 {
+        font-size: clamp(20px, 5vw, 28px);
+    }
+    
+    h3 {
+        font-size: clamp(18px, 4vw, 22px);
+    }
+    
+    /* Section spacing */
+    .section {
+        padding-block: clamp(20px, 3.5vw, 32px);
+    }
+    
+    .section-hd {
+        font-size: clamp(20px, 4vw, 24px);
+        margin-bottom: 8px;
+    }
+    
+    .section-kicker {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+}
+
+/* ========= MOBILE PORTRAIT (481px - 720px) ========= */
+
+@media (max-width: 720px) {
+    /* Card adjustments */
+    .card {
+        padding: clamp(14px, 2vw, 18px);
+    }
+    
+    /* Grid adjustments */
+    .explore-grid,
+    .repeater-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    /* News and events */
+    .news-items {
+        gap: 14px;
+    }
+    
+    .news-item {
+        padding-bottom: 14px;
+    }
+    
+    .events {
+        gap: 12px;
+    }
+    
+    .event {
+        padding: 10px 12px;
+    }
+    
+    /* Buttons */
+    .btn,
+    .link-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .section-cta {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    /* Images */
+    .content-card .card-image {
+        aspect-ratio: 16 / 10;
+    }
+}
+
+/* ========= SMALL MOBILE (320px - 480px) ========= */
+
+@media (max-width: 480px) {
+    body {
+        font-size: 13px;
+    }
+    
+    /* Wrapper */
+    .wrapper {
+        padding-inline: 12px;
+    }
+    
+    /* Typography */
+    h1 {
+        font-size: clamp(22px, 7vw, 32px);
+    }
+    
+    h2 {
+        font-size: clamp(18px, 6vw, 24px);
+    }
+    
+    h3 {
+        font-size: clamp(16px, 5vw, 20px);
+    }
+    
+    h4 {
+        font-size: clamp(15px, 4.5vw, 18px);
+    }
+    
+    /* Section spacing */
+    .section {
+        padding-block: clamp(16px, 3vw, 24px);
+    }
+    
+    /* Cards */
+    .card {
+        padding: 12px;
+    }
+    
+    .content-card .card-content {
+        padding: 12px;
+    }
+    
+    /* Buttons */
+    .btn,
+    .link-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+        letter-spacing: 0.4px;
+    }
+    
+    /* News items */
+    .news-item .title {
+        font-size: 1rem;
+    }
+    
+    .news-item .date,
+    .news-item .excerpt {
+        font-size: 0.85rem;
+    }
+    
+    /* Events */
+    .event .when {
+        font-size: 0.85rem;
+    }
+    
+    .event .what {
+        font-size: 0.95rem;
+    }
+    
+    .event .where {
+        font-size: 0.8rem;
+    }
+    
+    /* Repeaters */
+    .repeater h4 {
+        font-size: 1rem;
+    }
+    
+    .repeater .meta {
+        font-size: 0.8rem;
+    }
+    
+    .repeater .desc {
+        font-size: 0.85rem;
+    }
+    
+    /* Explore cards */
+    .explore-card .body {
+        padding: 14px;
+    }
+    
+    .explore-card h4 {
+        font-size: 1rem;
+    }
+    
+    .explore-card p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ========= EXTRA SMALL MOBILE (< 320px) ========= */
+
+@media (max-width: 319px) {
+    body {
+        font-size: 12px;
+    }
+    
+    .wrapper {
+        padding-inline: 10px;
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+    
+    h2 {
+        font-size: 18px;
+    }
+    
+    h3 {
+        font-size: 16px;
+    }
+    
+    .btn,
+    .link-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* ========= LANDSCAPE ORIENTATION ========= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-inner {
+        min-height: 400px;
+    }
+    
+    .site-header .header-top {
+        min-height: 100px;
+        padding: 12px 0 36px;
+    }
+    
+    .club-logo {
+        height: 100px;
+    }
+}
+
+/* ========= PRINT STYLES ========= */
+
+@media print {
+    .site-header,
+    .menu-bar,
+    .header-actions,
+    .site-footer,
+    .back-to-top,
+    .widget-area,
+    .section-cta,
+    .hero-cta {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+    }
+    
+    .wrapper {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    .card,
+    .content-card {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+}
+
+/* ========= HIGH CONTRAST MODE ========= */
+
+@media (prefers-contrast: high) {
+    :root {
+        --border: #000;
+        --muted: #333;
+    }
+    
+    .card,
+    .content-card,
+    .event,
+    .repeater {
+        border-width: 2px;
+    }
+    
+    .btn,
+    .link-btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ========= REDUCED MOTION ========= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .content-card:hover,
+    .explore-card:hover,
+    .repeater:hover,
+    .btn:hover,
+    .link-btn:hover {
+        transform: none;
+    }
+}
+
+/* ========= DARK MODE (FUTURE ENHANCEMENT) ========= */
+
+@media (prefers-color-scheme: dark) {
+    /* Dark mode styles can be added here in future versions */
+    /* Currently maintaining light theme for brand consistency */
+}
+
+/* ========= TOUCH DEVICE OPTIMIZATIONS ========= */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Increase touch targets */
+    .btn,
+    .link-btn,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .content-card:hover,
+    .explore-card:hover,
+    .repeater:hover {
+        transform: none;
+    }
+    
+    /* Larger tap areas for navigation */
+    #site-navigation .menu a {
+        padding: 12px 16px;
+    }
+}

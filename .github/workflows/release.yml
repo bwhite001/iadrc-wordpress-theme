@@ -1,0 +1,107 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Get version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: Verify version matches style.css
+        run: |
+          STYLE_VERSION=$(grep "Version:" vk4wip-theme/style.css | awk '{print $2}')
+          TAG_VERSION=${{ steps.get_version.outputs.version }}
+          if [ "$STYLE_VERSION" != "$TAG_VERSION" ]; then
+            echo "Error: Version in style.css ($STYLE_VERSION) doesn't match tag ($TAG_VERSION)"
+            exit 1
+          fi
+          echo "Version verified: $STYLE_VERSION"
+      
+      - name: Create theme directory structure
+        run: |
+          mkdir -p build
+          cp -r vk4wip-theme build/vk4wip-theme
+      
+      - name: Clean up development files
+        run: |
+          cd build/vk4wip-theme
+          # Remove development and system files
+          rm -f .DS_Store .gitignore
+          rm -rf .git .github
+          rm -rf node_modules vendor
+          rm -f package.json package-lock.json
+          rm -f composer.json composer.lock
+          rm -f phpcs.xml phpunit.xml
+          rm -f .editorconfig .eslintrc .stylelintrc
+          rm -f webpack.config.js gulpfile.js
+          # Remove any backup or temporary files
+          find . -name ".DS_Store" -delete
+          find . -name "Thumbs.db" -delete
+          find . -name "*~" -delete
+          find . -name "*.bak" -delete
+      
+      - name: Create installable zip
+        run: |
+          cd build
+          zip -r ../vk4wip-theme-${{ steps.get_version.outputs.version }}.zip vk4wip-theme
+      
+      - name: Generate changelog
+        id: changelog
+        run: |
+          if [ -f CHANGELOG.md ]; then
+            CHANGELOG=$(cat CHANGELOG.md | head -n 50)
+          else
+            CHANGELOG="See commit history for changes."
+          fi
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: VK4WIP Theme v${{ steps.get_version.outputs.version }}
+          body: |
+            # VK4WIP Amateur Radio Club WordPress Theme
+            
+            ## Version ${{ steps.get_version.outputs.version }}
+            
+            ### Installation
+            1. Download `vk4wip-theme-${{ steps.get_version.outputs.version }}.zip`
+            2. Go to WordPress Admin → Appearance → Themes → Add New → Upload Theme
+            3. Upload the zip file and activate
+            
+            ### Requirements
+            - WordPress 6.0 or higher
+            - PHP 7.4 or higher
+            
+            ### Recommended Plugins
+            - Advanced Custom Fields (ACF)
+            - Elementor
+            - Yoast SEO
+            
+            ### Changelog
+            ${{ steps.changelog.outputs.changelog }}
+            
+            ---
+            
+            **Full Documentation:** [README.md](https://github.com/${{ github.repository }}/blob/${{ steps.get_version.outputs.tag }}/vk4wip-theme/README.md)
+          files: vk4wip-theme-${{ steps.get_version.outputs.version }}.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

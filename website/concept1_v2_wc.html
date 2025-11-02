@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VK4WIP – Ipswich & District Radio Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ========= TOKENS ========= */
+:root{
+  --brand-blue: #1E5CB3;
+  --brand-navy: #0B2D53;
+  --brand-red:  #E53935;
+  --brand-gold: #F4C542;
+  --ink:       #222A35;
+  --muted:     #6B778C;
+  --paper:     #F7F8FB;
+  --white:     #fff;
+  --border:    #E0E6F0;
+  --shadow-1:  0 2px 10px rgba(0,0,0,.08);
+  --shadow-2:  0 10px 30px rgba(0,0,0,.18);
+
+  --hero-image: url("clubhouse_hero_bg.jpg");
+  --header-bg: url("website_header_bg_v4.jpg");
+}
+
+/* ========= BASE ========= */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+}
+.full-width{ width:100% }
+.wrapper{
+  max-width:1200px;
+  margin:0 auto;
+  padding-inline: clamp(16px, 3vw, 32px);
+}
+
+/* ========= HEADER (rebuild) ========= */
+.site-header{
+  position: relative;
+  isolation: isolate;
+  color: var(--white);
+  background:
+    radial-gradient(1200px 500px at 20% 30%, rgba(30,92,179,.65) 0%, rgba(30,92,179,.35) 35%, rgba(30,92,179,0) 65%),
+    var(--header-bg) center/100% auto no-repeat,
+    var(--brand-navy);
+}
+
+/* Top band holds title + floating actions. Grid keeps things tidy. */
+.header-top{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 132px;
+  padding: 18px 0 46px; /* extra bottom room for floating pill */
+}
+
+/* Overlapping logo (absolute so it dips into the gold bar) */
+.brandmark{
+  position: absolute;
+  left: clamp(16px, 2.5vw, 24px);
+  bottom: -36px;                 /* overlap into menu */
+  z-index: 5;
+}
+.club-logo{
+  height: clamp(140px, 18vw, 190px);
+  width: auto;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
+  margin-bottom:-35px;
+}
+
+/* Title block sits to the right so logo has space */
+.title-block{
+  grid-column: 1 / 2;
+  margin-left: clamp(140px, 22vw, 220px); /* space for logo */
+  max-width: 860px;
+}
+.site-title{
+  font-family: Montserrat, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: clamp(18px, 2.1vw, 26px);
+  padding-top:20px;
+}
+.site-tagline{
+  opacity: .92;
+  font-weight: 600;
+  font-size: clamp(12px, 1.2vw, 15px);
+  max-width: 68ch;
+}
+
+/* Floating quick-links pill that "rises" from the gold menu, right aligned */
+.header-actions{
+  grid-column: 2 / 3;
+  justify-self: end;
+  position: absolute;
+  right: clamp(16px, 3vw, 32px);
+  bottom: 0px; /* visually connected to menu */
+  z-index: 6;
+
+  display: inline-flex; align-items: center; gap: 14px;
+
+  background: rgba(0,0,0,.55);
+  border: 0px solid rgba(255,255,255,.18);
+  /* Border radious only on top corners to blend with menu */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: var(--shadow-2);
+}
+/*.header-actions::after{*/
+/*  content:"";*/
+/*  position:absolute;*/
+/*  inset-inline-end: 24px;*/
+/*  bottom:-8px;*/
+/*  border-width: 8px 8px 0 8px;*/
+/*  border-style: solid;*/
+/*  border-color: rgba(0,0,0,.55) transparent transparent transparent;*/
+/*  filter: drop-shadow(0 2px 0 rgba(0,0,0,.15));*/
+/*}*/
+.header-actions a{
+  color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; opacity:.95;
+}
+.header-actions a:hover{ opacity:1; text-decoration:underline }
+.header-actions .social img{ height:22px; width:22px; display:block; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+
+/* Gold menu bar (right aligned tabs) */
+.menu-bar{
+  position: relative;
+  z-index: 4; /* below floating pill & logo */
+  background: var(--brand-gold);
+  border-top: 3px solid rgba(0,0,0,.07);
+  border-bottom: 3px solid rgba(0,0,0,.07);
+}
+/* Add left padding area in the bar so the logo can overlap without covering menu items */
+.menu-bar .wrapper{
+  position: relative;
+  padding-left: clamp(140px, 22vw, 240px);
+}
+.tab-row{
+  display:flex; justify-content:flex-end; gap:18px; align-items:center;
+  height:64px; padding:0;
+  font-weight:800; text-transform:uppercase; letter-spacing:.6px;
+}
+.tab-row a{
+  color:#1E1E1E; text-decoration:none; padding:.4rem .7rem;
+  border-radius:6px; display:flex; align-items:center; height:40px;
+}
+.tab-row a.link-active {
+    background: rgba(0,0,0,.12);
+}
+.tab-row a:hover{ background: rgba(0,0,0,.06); }
+
+/* Responsive tweaks */
+@media (max-width: 980px){
+  .title-block{ margin-left: clamp(120px, 28vw, 180px); }
+  .club-logo{ height: clamp(110px, 22vw, 140px); }
+  .header-actions{ right:16px; bottom:-22px; }
+  .menu-bar .wrapper{ padding-left: clamp(110px, 30vw, 160px); }
+}
+@media (max-width: 720px){
+  .title-block{ margin-left: clamp(96px, 30vw, 140px); }
+  .site-title{ font-size: clamp(16px, 3.2vw, 20px); }
+  .site-tagline{ display:none; }
+  .tab-row{ gap:10px; height:58px; }
+  .header-actions{ gap:10px; padding:8px 10px; }
+}
+
+/* ========= HERO ========= */
+.hero{
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(1200px 500px at 20% 30%, rgba(30,92,179,.65) 0%, rgba(30,92,179,.35) 35%, rgba(30,92,179,0) 65%),
+    var(--hero-image) center/cover no-repeat,
+    var(--brand-navy);
+  color:var(--white);
+}
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:0;
+  background: linear-gradient(90deg, rgba(11,45,83,.55) 0%, rgba(11,45,83,.75) 45%, rgba(11,45,83,.85) 100%);
+}
+.hero-inner{
+  position:relative; z-index:1;
+  min-height: clamp(360px, 56vh, 560px);
+  display:grid; align-content:center;
+  padding-block: clamp(28px, 6vh, 64px);
+}
+.hero-grid{
+  display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(16px, 4vw, 40px);
+}
+@media (max-width: 900px){ .hero-grid{ grid-template-columns:1fr } }
+
+.hero-left{ display:flex; flex-direction:column; gap:18px; align-self:center; }
+.kicker{
+  font-weight:800; letter-spacing:.8px; text-transform:uppercase;
+  font-family: Montserrat, sans-serif; font-size: clamp(16px, 1.6vw, 18px);
+  opacity:.9;
+}
+.hero-title{
+  font-family: Montserrat, sans-serif;
+  font-weight:800; line-height:1; text-transform:uppercase;
+  font-size: clamp(36px, 6.2vw, 64px); margin:0;
+  text-shadow: 0 2px 0 rgba(0,0,0,.25);
+}
+.hero-sub{ font-size: clamp(18px, 2.2vw, 22px); margin: 4px 0 12px; opacity:.95; }
+.hero-cta{ display:grid; gap:14px; width:min(420px,100%); }
+.btn{
+  appearance:none; border:0; cursor:pointer; text-decoration:none; text-align:center;
+  font-weight:800; text-transform:uppercase; letter-spacing:.6px;
+  padding:14px 18px; border-radius:10px; box-shadow: var(--shadow-1);
+}
+.btn-gold{ background:var(--brand-gold); color:#1E1E1E }
+.btn-red{  background:var(--brand-red);  color:var(--white) }
+.btn:hover{ filter: brightness(.96) }
+.hero-right{
+  display:flex; align-items:flex-start; justify-content:flex-end;
+  font-family: Montserrat, sans-serif; font-weight:800; letter-spacing:1px;
+  font-size: clamp(22px, 3vw, 28px); opacity:.95;
+}
+
+/* ========= MAIN (centered sections) ========= */
+.section{ padding-block: clamp(28px, 5vw, 56px); }
+.twocol{ display:grid; gap: clamp(20px, 3.5vw, 40px); grid-template-columns: 1fr 1fr; }
+@media (max-width: 980px){ .twocol{ grid-template-columns:1fr } }
+.hd{ font-family: Montserrat, sans-serif; text-transform:uppercase; letter-spacing:.6px; margin:0 0 10px; font-size: clamp(22px, 3vw, 28px); }
+.subhd{ color:var(--muted); margin:0 0 14px; font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
+.block{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding: clamp(16px, 2.2vw, 24px); box-shadow: var(--shadow-1); }
+.news-list{ display:grid; gap:18px; }
+.article{ display:grid; gap:6px; }
+.article .date{ color:var(--muted); font-weight:600; font-size:.92rem }
+.article .title{ font-weight:800; font-size:1.05rem }
+.article .excerpt{ color:#3a4758 }
+.readmore{
+  display:inline-block; margin-top:8px; background:var(--brand-gold); color:#1E1E1E;
+  padding:10px 14px; border-radius:8px; font-weight:800; text-decoration:none; text-transform:uppercase; letter-spacing:.4px;
+}
+.feature-grid{ display:grid; gap:22px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+.feature{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding:20px; box-shadow: var(--shadow-1); }
+.feature h4{ margin:0 0 6px; font-family: Montserrat, sans-serif; text-transform:uppercase; }
+.kv{ color:var(--muted); font-weight:600; }
+
+/* ========= FOOTER ========= */
+.site-footer{
+  background: var(--brand-navy); color:var(--white);
+   position: relative;
+  isolation: isolate;
+  color: var(--white);
+  background:
+    radial-gradient(1200px 500px at 20% 30%, rgba(30,92,179,.65) 0%, rgba(30,92,179,.35) 35%, rgba(30,92,179,0) 65%),
+    var(--header-bg) center/100% auto no-repeat,
+    var(--brand-navy);
+}
+.footer-inner{ display:grid; gap:20px; grid-template-columns: 1.1fr .9fr; padding-block: clamp(26px,4.5vw,46px); }
+@media (max-width: 980px){ .footer-inner{ grid-template-columns:1fr } }
+.footer-brand{ display:flex; align-items:center; gap:14px; font-family: Montserrat, sans-serif; }
+.footer-brand-heading{ display:flex; align-items:center; gap:14px; font-family: Montserrat, sans-serif; text-transform:uppercase; font-weight:800; }
+.footer-brand img{ height:200px; border-radius:6px }
+.footer-links{ display:grid; gap:8px; align-content:start; margin-top:35px; margin-left:40px; max-width:200px; }
+.footer-links a{ color:var(--brand-gold); text-decoration:none; font-weight:700; display:block; padding-bottom:5px; }
+.footer-links a:hover{ text-decoration:underline }
+.small{ opacity:.85; font-size:.92rem }
+hr.foot{ border:0; border-top:1px solid rgba(255,255,255,.18); margin:0 }
+.footbar{ padding:12px 0; display:flex; justify-content:space-between; gap:10px; align-items:center; font-size:.92rem; color:#E9F2FF; }
+.footbar a{ color:#FFD86A; text-decoration:none }
+.footer-parking { margin-top:10px; font-size:0.8rem; opacity:.85; }
+
+
+/* === CONTENT LAYOUT (news + events) === */
+.content-two-col {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: clamp(20px, 3vw, 40px);
+}
+@media (max-width: 1024px) {
+  .content-two-col { grid-template-columns: 1fr; }
+}
+
+.section-hd {
+  font-family: Montserrat, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin: 0 0 10px;
+  font-size: clamp(22px, 3vw, 28px);
+}
+.section-kicker {
+  color: var(--muted);
+  margin: 0 0 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(16px, 2.2vw, 24px);
+  box-shadow: var(--shadow-1);
+}
+
+/* News list */
+.news-items { display: grid; gap: 18px; }
+.news-item { display: grid; gap: 6px; }
+.news-item .date { color: var(--muted); font-weight: 600; font-size: .92rem; }
+.news-item .title { font-weight: 800; font-size: 1.05rem; }
+.news-item .excerpt { color: #3a4758; }
+.link-btn {
+  display:inline-block; margin-top:10px;
+  background: var(--brand-gold); color:#1E1E1E;
+  padding:10px 14px; border-radius:8px; font-weight:800;
+  text-decoration:none; text-transform:uppercase; letter-spacing:.4px;
+}
+.link-btn--outline {
+  background: transparent; color: var(--brand-blue);
+  border: 2px solid var(--brand-blue);
+}
+
+/* Events list */
+.events {
+  display: grid; gap: 14px;
+}
+.event {
+  display: grid; gap: 6px;
+  padding: 12px 14px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+.event .when { font-weight: 800; color: var(--brand-blue); }
+.event .what { font-weight: 700; }
+.event .where { color: var(--muted); }
+
+/* === Explore More (preview links) === */
+.explore-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.explore-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+
+}
+.explore-card .body {
+  padding: 18px 18px 20px;
+
+}
+.explore-card h4 {
+  margin: 0 0 6px;
+  font-family: Montserrat, sans-serif;
+  text-transform: uppercase;
+}
+.explore-card p { margin: 0; color: #3a4758; }
+.explore-card a {
+  display: inline-block; margin-top: 12px;
+  color: var(--brand-blue); font-weight: 700; text-decoration: none;
+}
+.explore-card a:hover { text-decoration: underline; }
+
+/* Optional colored header bar on each explore card */
+.explore-card .stripe {
+  height: 8px;
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-gold));
+}
+
+/* === Repeaters section === */
+.repeaters-wrap { display: grid; gap: 22px; }
+.repeater-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.repeater {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 18px 16px;
+  box-shadow: var(--shadow-1);
+}
+.repeater h4 {
+  margin: 0 0 8px;
+  font-family: Montserrat, sans-serif;
+  text-transform: uppercase;
+}
+.repeater .meta { color: var(--muted); font-weight: 600; }
+.repeater .desc { margin: 8px 0 10px; color: #3a4758; }
+.repeater .links {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.repeater .links a {
+  text-decoration: none; font-weight: 700;
+  color: var(--brand-blue);
+}
+.repeater .links a:hover { text-decoration: underline; }
+
+/* Section CTA row */
+.section-cta {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+}
+.section-cta .link-btn { margin-top: 0; }
+
+/* Subtle band between blocks */
+.band {
+  background: #EEF3FA;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.explore-outline-buttons {
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    position:relative; margin-right:0px; margin-left:auto;
+}
+</style>
+</head>
+<body>
+
+<!-- ======= HEADER (overlap logo + right-aligned menu + floating links) ======= -->
+<header class="site-header full-width">
+  <div class="wrapper header-top">
+    <a class="brandmark" href="/">
+      <img src="VK4WIP.png" alt="VK4WIP Logo" class="club-logo" />
+    </a>
+
+    <div class="title-block">
+      <div class="site-title">VK4WIP: Ipswich and District Radio Club, Inc.</div>
+      <div class="site-tagline">Using and promoting Amateur (HAM) Radio in the Ipswich and surrounding areas since 1962</div>
+    </div>
+
+    <nav class="header-actions" aria-label="Header quick links">
+      <a href="#">News</a>
+      <a href="#">Events</a>
+      <a href="#">Contact</a>
+      <a href="https://www.facebook.com/vk4wip" target="_blank" rel="noopener" class="social" aria-label="Facebook">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="">
+      </a>
+    </nav>
+  </div>
+
+  <div class="menu-bar">
+    <div class="wrapper">
+      <nav class="tab-row" aria-label="Primary">
+        <a href="#" class="link-active">Home</a>
+        <a href="#">About</a>
+        <a href="#">Meetings</a>
+        <a href="#">Calendar</a>
+        <a href="#">Social</a>
+        <a href="#">On-Air</a>
+        <a href="#">Training</a>
+        <a href="#">Members</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ======= HERO ======= -->
+<section class="hero full-width">
+  <div class="wrapper hero-inner">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-title">Welcome!</h1>
+        <div class="kicker">We are a member run not-for-profit organisation for using and promoting Amateur (HAM) Radio</div>
+        <p class="hero-sub">VK4WIP · Community · Learning · Radio [Since 1962]</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#">About Us</a>
+          <a class="btn btn-red"  href="#">Meetings &amp; Events</a>
+          <a class="btn btn-gold" href="#">Get Your License</a>
+        </div>
+      </div>
+      <div class="hero-right">VK4WIP</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MAIN ======= -->
+<main>
+
+  <!-- NEWS (left) + UPCOMING EVENTS (right) -->
+  <section class="section">
+    <div class="wrapper content-two-col">
+      <!-- Latest News -->
+      <div>
+        <h2 class="section-hd">Latest News</h2>
+        <p class="section-kicker">Recent updates from the club</p>
+        <div class="card">
+          <div class="news-items">
+            <article class="news-item">
+              <div class="title">November Digital Interest Night – Bring Your Projects</div>
+              <div class="date">Mon 3 Nov 2025 · 7:30 PM AEST</div>
+              <p class="excerpt">We’ll share demos on SSTV, APRS and AllStar. Visitors welcome — bring anything you’re tinkering with.</p>
+            </article>
+            <article class="news-item">
+              <div class="title">JOTA/JOTI Wrap-Up</div>
+              <div class="date">Sat 18 Oct 2025</div>
+              <p class="excerpt">Thanks to everyone who helped get scouts on air across HF, VHF and digital. Photos and notes now posted.</p>
+            </article>
+            <article class="news-item">
+              <div class="title">Clubhouse Audio Upgrade</div>
+              <div class="date">Tue 7 Oct 2025</div>
+              <p class="excerpt">We’ve improved RX audio routing for demos and training nights. Notes and wiring diagram available.</p>
+            </article>
+          </div>
+
+          <div class="section-cta" style="margin-top:16px;">
+            <a href="#" class="link-btn">View All Posts</a>
+            <a href="#" class="link-btn link-btn--outline">Club Blog RSS</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Events -->
+      <aside>
+        <h2 class="section-hd">Upcoming Events</h2>
+        <p class="section-kicker">Meetings · Nets · Social</p>
+        <div class="card">
+          <div class="events">
+            <div class="event">
+              <div class="when">Mon 3 Nov · 7:30 PM</div>
+              <div class="what">Digital Interest Night</div>
+              <div class="where">Club House · 10 Deebing St, Ipswich</div>
+            </div>
+            <div class="event">
+              <div class="when">Sat 22 Nov · 10:00 AM</div>
+              <div class="what">Business Meeting</div>
+              <div class="where">Club House + Zoom</div>
+            </div>
+            <div class="event">
+              <div class="when">Every Mon · 7:30 PM</div>
+              <div class="what">Weekly Net</div>
+              <div class="where">VK4RAI 146.700 (–600 kHz, 91.5 Hz)</div>
+            </div>
+          </div>
+
+          <div class="section-cta" style="margin-top:16px;">
+            <a href="#" class="link-btn">View Calendar</a>
+            <a href="#" class="link-btn link-btn--outline">Add to Google/ICS</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PREVIEW CONTENT (between News/Events and Repeaters) -->
+  <section class="section band">
+    <div class="wrapper">
+      <h2 class="section-hd">Explore More</h2>
+      <p class="section-kicker">Highlights from the website</p>
+
+      <div class="explore-grid">
+        <article class="explore-card">
+          <div class="stripe"></div>
+          <div class="body">
+            <h4>Silent Key Memorial Board</h4>
+            <p>Honouring members who became Silent Keys. Memories, callsigns and stories.</p>
+            <a href="https://ipswichradioclub.org.au/silent-key-memorial-board/">Learn more →</a>
+          </div>
+        </article>
+
+        <article class="explore-card">
+          <div class="stripe"></div>
+          <div class="body">
+            <h4>Club History</h4>
+            <p>From 1962 to today — photos, milestones and projects that shaped VK4WIP.</p>
+            <a href="https://ipswichradioclub.org.au/history/">Read the history →</a>
+          </div>
+        </article>
+
+        <article class="explore-card">
+          <div class="stripe"></div>
+          <div class="body">
+            <h4>Membership</h4>
+            <p>Join the club, support our repeaters and take part in events and nets.</p>
+            <a href="https://ipswichradioclub.org.au/membership/">Join now →</a>
+          </div>
+        </article>
+
+        <article class="explore-card">
+          <div class="stripe"></div>
+          <div class="body">
+            <h4>Equipment Loan Scheme</h4>
+            <p>Get on air with loan gear for training, experimentation and events.</p>
+            <a href="https://ipswichradioclub.org.au/club-equipment-loan-scheme/">See how it works →</a>
+          </div>
+        </article>
+
+        <article class="explore-card">
+          <div class="stripe"></div>
+          <div class="body">
+            <h4>Club Sponsors</h4>
+            <p>Thanks to our partners who help keep the club active and on air.</p>
+            <a href="https://ipswichradioclub.org.au/club-sponsors/">Meet our sponsors →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPEATERS (expanded, above footer) -->
+  <section class="section">
+    <div class="wrapper repeaters-wrap">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
+        <h2 class="section-hd" style="margin-bottom:0;">Repeaters & Nets</h2>
+        <div class="explore-outline-buttons">
+          <a href="https://ipswichradioclub.org.au/repeaters/" class="link-btn link-btn--outline" style="float:right;">Full repeater info</a>
+          <a href="https://ipswichradioclub.org.au/repeater-maintenance/" class="link-btn link-btn--outline" style="float:right;">Repeater maintenance & site photos</a>
+        </div>
+      </div>
+      <p class="section-kicker">Operational services across the district</p>
+
+      <div class="repeater-grid">
+
+        <article class="repeater">
+          <h4>VK4RAI — 2m</h4>
+          <div class="meta">146.900 MHz · –600 kHz · 91.5 Hz</div>
+          <p class="desc">Primary VHF voice repeater for the club. Monday night net at 19:30 AEST — visitors welcome.</p>
+          <div class="links">
+            <a href="https://ipswichradioclub.org.au/repeaters/">Details</a>
+            <a href="https://ipswichradioclub.org.au/repeater-maintenance/">Site & maintenance</a>
+          </div>
+        </article>
+
+        <article class="repeater">
+          <h4>UHF — 70 cm</h4>
+          <div class="meta">438.4250 MHz · –5 MHz · 123.0 Hz</div>
+          <p class="desc">UHF coverage for local events and portable operations. Often used for coordination.</p>
+          <div class="links">
+            <a href="https://ipswichradioclub.org.au/repeaters/">Details</a>
+            <a href="https://ipswichradioclub.org.au/repeater-maintenance/">Site & maintenance</a>
+          </div>
+        </article>
+
+        <article class="repeater">
+          <h4>APRS / Packet</h4>
+          <div class="meta">VHF APRS services (callsign-SSID varies)</div>
+          <p class="desc">Position beacons and messaging for events and experimentation.</p>
+          <div class="links">
+            <a href="https://ipswichradioclub.org.au/repeaters/">Details</a>
+            <a href="https://ipswichradioclub.org.au/repeater-maintenance/">Site & maintenance</a>
+          </div>
+        </article>
+
+        <article class="repeater">
+          <h4>Experimental / Projects</h4>
+          <div class="meta">DMR · AllStar · SSTV · More</div>
+          <p class="desc">Digital modes used at the club, by members, and for special activities.</p>
+          <div class="links">
+            <a href="https://ipswichradioclub.org.au/repeaters/">Details</a>
+            <a href="https://ipswichradioclub.org.au/repeater-maintenance/">Site & maintenance</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ======= FOOTER ======= -->
+<footer class="site-footer full-width">
+  <div class="wrapper footer-inner">
+    <div class="footer-brand">
+
+      <img src="VK4WIP.png" alt="Club Logo">
+      <div>
+        <div class="footer-brand-heading">Ipswich & District Radio Club · VK4WIP</div>
+
+        <div class="footer-sub-text small" style="display:block; margin-top:8px; font-weight:600; opacity:.85; margin-top:20px;">
+
+          <div style="font-size:1.1rem; margin-bottom:4px;"><strong>The Club House</strong></div>
+          <div>10 Deebing St, Ipswich QLD 4305</div>
+          <div class="footer-parking">
+            Free onsite parking available for members and visitors during club events, meetings, and training sessions.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div style="display:inline-block; margin-left:auto;">
+      <div class="footer-links" style="display:inline-block;">
+        <a href="#">Membership</a>
+        <a href="#">Contact</a>
+        <a href="#">Events</a>
+        <a href="#">Privacy</a>
+      </div>
+
+      <div class="footer-links" style="display:inline-block;">
+        <a href="#">Membership</a>
+        <a href="#">Contact</a>
+        <a href="#">Events</a>
+        <a href="#">Privacy</a>
+      </div>
+
+      <div class="footer-links" style="display:inline-block;">
+        <a href="#">Membership</a>
+        <a href="#">Contact</a>
+        <a href="#">Events</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+
+  </div>
+  <hr class="foot">
+  <div class="wrapper footbar">
+    <div>© 1962-2025 Ipswich & District Radio Club, Inc</div>
+    <div>ABN: 31 147 734 363</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+{
+  "theme_name": "VK4WIP Amateur Radio Club Theme",
+  "base_template": "BlogBD WordPress Theme",
+  "color_palette": {
+    "primary": {
+      "brand_blue": "#1E5CB3",
+      "brand_navy": "#0B2D53",
+      "brand_red": "#E53935",
+      "brand_gold": "#F4C542"
+    },
+    "neutral": {
+      "ink": "#222A35",
+      "muted": "#6B778C",
+      "paper": "#F7F8FB",
+      "white": "#fff",
+      "border": "#E0E6F0"
+    }
+  },
+  "typography": {
+    "primary_font": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+    "heading_font": "Montserrat, sans-serif"
+  },
+  "layout_components": {
+    "header": {
+      "components": [
+        "brandmark with logo",
+        "site title",
+        "site tagline",
+        "navigation menu",
+        "member login button"
+      ],
+      "background": "url(website_header_bg_v4.jpg) with blue overlay",
+      "layout": "flex with wrapper container"
+    },
+    "hero_section": {
+      "layout": "two-column grid (hero-grid)",
+      "left_column": [
+        "kicker text",
+        "h1 heading",
+        "description text",
+        "CTA button"
+      ],
+      "right_column": [
+        "feature image",
+        "date badge"
+      ],
+      "background": "url(clubhouse_hero_bg.jpg)"
+    },
+    "content_sections": [
+      {
+        "name": "Latest News",
+        "type": "two-column layout",
+        "cards": true
+      },
+      {
+        "name": "Upcoming Events",
+        "type": "calendar list with dates"
+      },
+      {
+        "name": "Explore More",
+        "type": "card grid",
+        "grid_columns": "4 columns responsive"
+      },
+      {
+        "name": "Repeaters & Nets",
+        "type": "card grid",
+        "grid_columns": "4 columns responsive"
+      }
+    ],
+    "footer": {
+      "sections": [
+        "brand section with logo",
+        "quick links",
+        "contact info",
+        "parking info"
+      ],
+      "layout": "multi-column grid",
+      "copyright": true
+    }
+  },
+  "responsive_breakpoints": {
+    "desktop": "default",
+    "tablet": "980px",
+    "mobile_large": "720px",
+    "mobile": "900px"
+  },
+  "key_features": [
+    "Custom post types for news and events",
+    "Repeater information custom fields",
+    "Card-based content layouts",
+    "Hero section with featured content",
+    "Member login integration",
+    "Navigation with active states",
+    "Responsive grid layouts",
+    "Custom color scheme implementation"
+  ]
+}
