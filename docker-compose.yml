@@ -1,10 +1,9 @@
-version: '3.8'
-
 services:
   # MySQL Database
   db:
     image: mysql:8.0
     container_name: vk4wip-db
+    hostname: vk4wip-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: wordpress_root_pass
@@ -15,6 +14,8 @@ services:
       - ./_build/db_data:/var/lib/mysql
     ports:
       - 3306:3306
+    networks:
+      - vk4wip-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pwordpress_root_pass"]
       interval: 10s
@@ -24,6 +25,7 @@ services:
   # WordPress
   wordpress:
     image: wordpress:latest
+    hostname: vk4wip-wordpress
     container_name: vk4wip-wordpress
     restart: unless-stopped
     depends_on:
@@ -36,12 +38,13 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_pass
       WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_CONFIG_EXTRA: |
-        define('WP_DEBUG', true);
-        define('WP_DEBUG_LOG', true);
-        define('WP_DEBUG_DISPLAY', false);
-        define('SCRIPT_DEBUG', true);
-        define('SAVEQUERIES', true);
+      APACHE_SERVER_NAME: vk4wip-wordpress
+      # WORDPRESS_CONFIG_EXTRA: |
+      #   define('WP_DEBUG', true);
+      #   define('WP_DEBUG_LOG', true);
+      #   define('WP_DEBUG_DISPLAY', false);
+      #   define('SCRIPT_DEBUG', true);
+      #   define('SAVEQUERIES', true);
     volumes:
       # Mount theme directory
       - ./vk4wip-theme:/var/www/html/wp-content/themes/vk4wip-theme
@@ -61,6 +64,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: vk4wip-phpmyadmin
+    hostname: vk4wip-phpmyadmin
     restart: unless-stopped
     depends_on:
       - db
@@ -78,6 +82,7 @@ services:
   wpcli:
     image: wordpress:cli
     container_name: vk4wip-wpcli
+    hostname: vk4wip-wpcli
     depends_on:
       wordpress:
         condition: service_healthy
