@@ -36,7 +36,6 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_pass
       WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DEBUG: 1
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_DEBUG', true);
         define('WP_DEBUG_LOG', true);
