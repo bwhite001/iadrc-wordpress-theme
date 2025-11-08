@@ -9,6 +9,7 @@ A modern, responsive WordPress theme designed specifically for the VK4WIP (Ipswi
 ## 📋 Table of Contents
 
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Installation](#installation)
   - [Local Development (Docker)](#local-development-docker)
@@ -48,6 +49,213 @@ A modern, responsive WordPress theme designed specifically for the VK4WIP (Ipswi
 - **Accessible** - WCAG 2.1 AA compliant
 - **Modern UI** - Card-based layouts, smooth animations
 - **Brand Colors** - Blue (#003366), Red (#CC0000), Gold (#D4AF37)
+
+---
+
+## 📸 Screenshots
+
+### Desktop View (1024px+)
+
+#### Hero Section
+![Hero Section - Desktop](docs/screenshots/desktop-hero.png)
+*Hero section with badge, gradient overlay, and three CTA buttons*
+
+**Key Features Visible:**
+- ✅ Hero badge: "VK4WIP: Community · Learning · Radio [Since 1962]"
+- ✅ Large "WELCOME!" title with text shadow
+- ✅ Subtitle and tagline with proper hierarchy
+- ✅ Three buttons: Gold "ABOUT US", Red "MEETINGS & EVENTS", Gold "GET YOUR LICENSE"
+- ✅ Navy-to-red gradient overlay
+- ✅ VK4WIP callsign watermark on right
+
+#### News & Events Section
+![News & Events - Desktop](docs/screenshots/desktop-news-events.png)
+*Two-column layout with latest news and upcoming events*
+
+**Key Features Visible:**
+- ✅ "LATEST NEWS" section with recent posts
+- ✅ "UPCOMING EVENTS" section with event cards
+- ✅ Side-by-side layout (40/60 split)
+- ✅ Proper spacing and card styling
+
+#### Explore Section
+![Explore Section - Desktop](docs/screenshots/desktop-explore.png)
+*Six explore cards with CTA buttons*
+
+**Key Features Visible:**
+- ✅ "Explore VK4WIP" title
+- ✅ Six cards in grid layout (Silent Key, Club History, Membership, Equipment Loan, Sponsors, WICEN)
+- ✅ Two CTA buttons: "CLUB BLOG RSS" and "MEET OUR SPONSORS →"
+- ✅ Outline button styling
+
+#### Repeaters Section
+![Repeaters Section - Desktop](docs/screenshots/desktop-repeaters.png)
+*Dark background with glass-effect repeater cards*
+
+**Key Features Visible:**
+- ✅ Dark navy background (#0B2D53)
+- ✅ White text for excellent contrast
+- ✅ Four repeater cards with semi-transparent backgrounds
+- ✅ Glass effect (backdrop-filter blur)
+- ✅ Technical details: Callsign, Location, Output, Offset, CTCSS
+
+#### Meetings Section
+![Meetings Section - Desktop](docs/screenshots/desktop-meetings.png)
+*Three meeting cards with schedule information*
+
+**Key Features Visible:**
+- ✅ "Regular Meetings" title
+- ✅ Three cards: Digital Interest Group, Social Meeting, Business Meeting
+- ✅ Icons, schedules, and descriptions
+- ✅ Clubhouse location information
+
+---
+
+### Tablet View (768px - 980px)
+
+#### Hero Section - Tablet
+![Hero Section - Tablet](docs/screenshots/tablet-hero.png)
+*Responsive hero section on tablet*
+
+**Responsive Features:**
+- ✅ Hero badge scales appropriately
+- ✅ Title and text remain readable
+- ✅ Buttons stack vertically
+- ✅ Callsign watermark adjusts size
+
+#### Layout - Tablet
+![Full Page - Tablet](docs/screenshots/tablet-full.png)
+*Complete page layout on tablet*
+
+**Responsive Features:**
+- ✅ News/Events may stack or remain side-by-side
+- ✅ Explore cards adjust to 2 columns
+- ✅ Repeater cards adjust to 2 columns
+- ✅ Meeting cards adjust to 2 columns
+- ✅ Navigation remains accessible
+
+---
+
+### Mobile View (< 720px)
+
+#### Hero Section - Mobile
+![Hero Section - Mobile](docs/screenshots/mobile-hero.png)
+*Mobile-optimized hero section*
+
+**Mobile Features:**
+- ✅ Hero badge visible and readable
+- ✅ Title scales down appropriately
+- ✅ Text wraps correctly
+- ✅ Buttons full-width and stacked
+- ✅ Touch-friendly button size (44px+ height)
+
+#### Navigation - Mobile
+![Mobile Menu](docs/screenshots/mobile-menu.png)
+*Mobile hamburger menu*
+
+**Mobile Features:**
+- ✅ Hamburger menu icon visible
+- ✅ Menu opens on tap
+- ✅ Menu items stack vertically
+- ✅ Touch-friendly tap targets
+
+#### Content Sections - Mobile
+![Content - Mobile](docs/screenshots/mobile-content.png)
+*Mobile content layout*
+
+**Mobile Features:**
+- ✅ All sections stack to single column
+- ✅ News cards full-width
+- ✅ Event cards full-width
+- ✅ Explore cards full-width
+- ✅ Repeater cards full-width
+- ✅ No horizontal scrolling
+- ✅ All text readable without zooming
+
+---
+
+### Testing Documentation
+
+For comprehensive responsive testing instructions, see:
+- **[Mobile & Tablet Testing Guide](MOBILE_TABLET_TESTING.md)** - Complete testing procedures
+- **[QA Testing Results](QA_TESTING_RESULTS.md)** - Desktop testing results
+- **[Testing & Deployment Guide](TESTING_AND_DEPLOYMENT.md)** - Full testing checklist
+
+#### Quick Testing Reference
+
+**Desktop Testing (✅ Complete):**
+- Hero section with badge and gradient
+- News & Events two-column layout
+- Explore section with 6 cards + CTA buttons
+- Repeaters section with dark background
+- Meetings section with 3 cards
+- All CSS variables and utilities working
+
+**Mobile/Tablet Testing (📋 Manual Testing Required):**
+- Test at 480px, 720px, 980px breakpoints
+- Verify responsive layouts
+- Test touch interactions
+- Verify mobile menu functionality
+- Check text readability
+- Ensure no horizontal scrolling
+
+**Browser Testing:**
+- ✅ Chrome 142.0.0.0 (Tested)
+- ⚠️ Firefox (Manual testing required)
+- ⚠️ Safari (Manual testing required)
+- ⚠️ Edge (Manual testing required)
+
+---
+
+### How to Capture Screenshots
+
+#### Using Browser DevTools
+
+1. **Open DevTools:**
+   ```
+   Press F12 or right-click → Inspect
+   ```
+
+2. **Enable Device Toolbar:**
+   ```
+   Press Ctrl+Shift+M (Windows/Linux)
+   Press Cmd+Shift+M (Mac)
+   ```
+
+3. **Set Viewport Size:**
+   - Desktop: 1920x1080 or 1366x768
+   - Tablet: 768x1024 or 980x1200
+   - Mobile: 375x667 (iPhone) or 360x640 (Android)
+
+4. **Capture Screenshot:**
+   - Chrome: DevTools → ⋮ menu → Capture screenshot
+   - Firefox: DevTools → ⋮ menu → Take a screenshot
+   - Or use browser extensions like "Full Page Screen Capture"
+
+5. **Save to docs/screenshots/:**
+   ```bash
+   mkdir -p docs/screenshots
+   # Save with descriptive names:
+   # desktop-hero.png
+   # tablet-full.png
+   # mobile-menu.png
+   ```
+
+#### Screenshot Naming Convention
+
+```
+docs/screenshots/
+├── desktop-hero.png
+├── desktop-news-events.png
+├── desktop-explore.png
+├── desktop-repeaters.png
+├── desktop-meetings.png
+├── tablet-hero.png
+├── tablet-full.png
+├── mobile-hero.png
+├── mobile-menu.png
+└── mobile-content.png
+```
 
 ---
 
