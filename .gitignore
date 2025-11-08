@@ -69,3 +69,5 @@ phpunit.xml
 docs/_build/
 site/
 **TODO.md**
+*.md
+!README.md

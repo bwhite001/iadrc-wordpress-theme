@@ -115,3 +115,13 @@
         </a>
     </div>
 </div>
+
+<!-- Section CTA Buttons -->
+<div class="section-cta explore-cta">
+    <a href="<?php echo esc_url( home_url( '/blog' ) ); ?>" class="btn btn-outline">
+        <?php esc_html_e( 'CLUB BLOG RSS', 'vk4wip-theme' ); ?>
+    </a>
+    <a href="<?php echo esc_url( home_url( '/sponsors' ) ); ?>" class="btn btn-outline">
+        <?php esc_html_e( 'MEET OUR SPONSORS', 'vk4wip-theme' ); ?> →
+    </a>
+</div>

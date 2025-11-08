@@ -20,13 +20,40 @@
     --white: #fff;
     --border: #E0E6F0;
     
+    /* ========= SEMANTIC COLOR ALIASES ========= */
+    --color-white: var(--white);
+    --color-text-primary: var(--ink);
+    --color-text-secondary: var(--muted);
+    --color-background-alt: var(--paper);
+    --color-primary: var(--brand-blue);
+    --color-primary-dark: var(--brand-navy);
+    --color-primary-light: rgba(30, 92, 179, 0.1);
+    --color-secondary: var(--brand-red);
+    --color-secondary-light: rgba(229, 57, 53, 0.1);
+    --color-accent: var(--brand-gold);
+    --color-accent-light: rgba(244, 197, 66, 0.1);
+    
     /* ========= SHADOWS ========= */
     --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.08);
     --shadow-2: 0 10px 30px rgba(0, 0, 0, 0.18);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
     
     /* ========= TYPOGRAPHY ========= */
     --font-primary: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --font-heading: Montserrat, sans-serif;
+    
+    /* ========= FONT SIZES ========= */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 3rem;
     
     /* ========= SPACING ========= */
     --spacing-xs: 8px;
@@ -36,12 +63,17 @@
     --spacing-xl: 32px;
     --spacing-2xl: 48px;
     --spacing-3xl: 64px;
+    --spacing-section: clamp(48px, 8vw, 80px);
     
     /* ========= BORDER RADIUS ========= */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 12px;
     --radius-xl: 14px;
+    --border-radius-sm: var(--radius-sm);
+    --border-radius-md: var(--radius-md);
+    --border-radius-lg: var(--radius-lg);
+    --border-radius-full: 9999px;
     
     /* ========= TRANSITIONS ========= */
     --transition-fast: 0.15s ease;
@@ -84,10 +116,26 @@ body {
     width: 100%;
 }
 
-.wrapper {
+.wrapper,
+.container {
     max-width: var(--wrapper-max-width);
     margin: 0 auto;
     padding-inline: var(--wrapper-padding);
+}
+
+/* Section padding utility */
+.section-padding {
+    padding: var(--spacing-section) 0;
+}
+
+/* Background utilities */
+.bg-light {
+    background-color: var(--color-background-alt);
+}
+
+.bg-dark {
+    background-color: var(--brand-navy);
+    color: var(--color-white);
 }
 
 /* ========= TYPOGRAPHY UTILITIES ========= */
@@ -171,15 +219,47 @@ a:focus {
     color: var(--white);
 }
 
-.link-btn--outline {
+.link-btn--outline,
+.btn-outline {
     background: transparent;
     color: var(--brand-blue);
     border: 2px solid var(--brand-blue);
 }
 
-.link-btn--outline:hover {
+.link-btn--outline:hover,
+.btn-outline:hover {
     background: var(--brand-blue);
     color: var(--white);
+}
+
+/* ========= ACCESSIBILITY ========= */
+
+/* Focus indicators for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--brand-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--brand-blue);
+    color: var(--white);
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 0;
 }
 
 /* ========= SECTION STYLES ========= */

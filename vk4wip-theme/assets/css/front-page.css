@@ -494,6 +494,15 @@
     gap: var(--spacing-sm);
 }
 
+/* Explore section CTA buttons */
+.explore-cta {
+    margin-top: var(--spacing-2xl);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
 /* ========================================
    Repeater Cards
    ======================================== */
@@ -726,6 +735,14 @@
     }
     
     .section-cta .btn {
+        width: 100%;
+    }
+    
+    .explore-cta {
+        flex-direction: column;
+    }
+    
+    .explore-cta .btn {
         width: 100%;
     }
 }
