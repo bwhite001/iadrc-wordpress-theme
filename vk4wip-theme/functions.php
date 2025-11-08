@@ -139,8 +139,9 @@ function vk4wip_theme_setup() {
     add_image_size( 'vk4wip-hero-image', 600, 400, true );
     add_image_size( 'vk4wip-featured', 1200, 600, true );
     
-    // Register additional navigation menus
+    // Register navigation menus
     register_nav_menus( array(
+        'primary'     => esc_html__( 'Primary Menu', 'vk4wip-theme' ),
         'footer-menu' => esc_html__( 'Footer Menu', 'vk4wip-theme' ),
     ) );
 }
@@ -255,10 +256,14 @@ add_action( 'widgets_init', 'vk4wip_widgets_init' );
  */
 function vk4wip_default_menu() {
     echo '<ul class="menu">';
-    echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'vk4wip-theme' ) . '</a></li>';
-    echo '<li><a href="' . esc_url( home_url( '/about' ) ) . '">' . esc_html__( 'About', 'vk4wip-theme' ) . '</a></li>';
-    echo '<li><a href="' . esc_url( home_url( '/events' ) ) . '">' . esc_html__( 'Events', 'vk4wip-theme' ) . '</a></li>';
-    echo '<li><a href="' . esc_url( home_url( '/contact' ) ) . '">' . esc_html__( 'Contact', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'HOME', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/about' ) ) . '">' . esc_html__( 'ABOUT', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/meetings' ) ) . '">' . esc_html__( 'MEETINGS', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/calendar' ) ) . '">' . esc_html__( 'CALENDAR', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/social' ) ) . '">' . esc_html__( 'SOCIAL', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/on-air' ) ) . '">' . esc_html__( 'ON-AIR', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/training' ) ) . '">' . esc_html__( 'TRAINING', 'vk4wip-theme' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/members' ) ) . '">' . esc_html__( 'MEMBERS', 'vk4wip-theme' ) . '</a></li>';
     echo '</ul>';
 }
 

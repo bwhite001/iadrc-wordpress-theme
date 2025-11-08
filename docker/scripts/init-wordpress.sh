@@ -30,7 +30,9 @@ echo -e "${BLUE}Step 1: Waiting for WordPress to be ready...${NC}"
 MAX_ATTEMPTS=30
 ATTEMPT=0
 while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
-    if wp db check 2>/dev/null; then
+    # Test database connectivity using mysql command instead of wp db check
+    # to avoid SSL certificate issues with mariadb-check
+    if mysql -h db -u wordpress -pwordpress_pass -e "SELECT 1;" 2>/dev/null >/dev/null; then
         echo -e "${GREEN}✓ Database is accessible${NC}"
         break
     fi

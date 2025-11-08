@@ -42,34 +42,22 @@ vk4wip_format_event_date($post_id)
 
 Access with `get_theme_mod('vk4wip_setting_name', 'default')` - see `front-page.php` for examples.
 
-## Development Workflow
-
-### Docker Environment (Primary Workflow)
-```bash
-# Start development (use Make for convenience)
-make start              # Starts WordPress + MySQL + phpMyAdmin
-make theme-activate     # Activates theme after first start
-make logs              # View WordPress logs
-
-# Access points:
-# - WordPress: http://localhost:8080
-# - phpMyAdmin: http://localhost:8081
-```
-
-**Important**: Theme directory is live-mounted - CSS/PHP changes reflect immediately (browser refresh only).
-
-### File Editing Guidelines
-1. **CSS Changes**: Edit files in `assets/css/` - enqueued in dependency order via `functions.php`
-2. **PHP Logic**: Add functions to `inc/theme-functions.php` or create new include files
-3. **Templates**: Use `get_template_part()` pattern - see `front-page.php` for reference
-4. **Custom Fields**: Register in `inc/custom-fields.php` using WordPress meta box API
-
-### Version Management
-Version is single source of truth in `vk4wip-theme/style.css`:
-```css
-Version: 1.0.0
-```
-Increment here for releases. GitHub Actions reads this for automated builds.
+## Developer Workflow
+- **Local development:**
+  - Use Docker (`make start`, `make stop`, etc.) for a reproducible WP environment.
+  - Activate theme: `make theme-activate` or `docker-compose exec wpcli sh /scripts/init-wordpress.sh`
+  - Install plugins: `make plugin-install`
+  - View logs: `make logs` or `docker-compose exec wordpress tail -f /var/www/html/wp-content/debug.log`
+- **Database connectivity:**
+  - MySQL 8.0 uses SSL by default; disabled via `--ssl=0` flag in `docker-compose.yml`
+  - MariaDB client (used by WP-CLI) configured with `skip-ssl` in `docker/mysql-client.cnf`
+  - MySQL native password authentication enabled for compatibility
+- **Testing:**
+  - Changes are live after editing theme files and refreshing the browser.
+  - Responsive and accessibility testing is required (WCAG 2.1 AA compliance).
+- **Build/Release:**
+  - On push to `main` or tag (`vX.X.X`), workflows build and upload a zip artifact.
+  - To release: bump version in `style.css`, commit, push, create tag, push tag.
 
 ## Common Tasks
 

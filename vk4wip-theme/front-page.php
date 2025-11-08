@@ -22,49 +22,41 @@ get_header();
     
     <?php
     /**
-     * Latest News Section
-     * Display recent blog posts in card layout
+     * Latest News & Upcoming Events Section
+     * Display side-by-side layout
      */
-    $news_count = get_theme_mod( 'vk4wip_news_count', 3 );
-    if ( $news_count > 0 ) :
     ?>
-        <section class="news-section section-padding">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title"><?php esc_html_e( 'Latest News', 'vk4wip-theme' ); ?></h2>
-                    <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="section-link">
-                        <?php esc_html_e( 'View All News', 'vk4wip-theme' ); ?>
-                        <span class="arrow">→</span>
-                    </a>
+    <section class="news-events-section section-padding bg-light">
+        <div class="container">
+            <div class="news-events-grid">
+                <div class="news-column">
+                    <div class="section-header">
+                        <h2 class="section-title"><?php esc_html_e( 'LATEST NEWS', 'vk4wip-theme' ); ?></h2>
+                        <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="section-link">
+                            <?php esc_html_e( 'View All News', 'vk4wip-theme' ); ?>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                    <p class="section-subtitle"><?php esc_html_e( 'RECENT UPDATES FROM THE CLUB', 'vk4wip-theme' ); ?></p>
+                    
+                    <?php get_template_part( 'template-parts/news', 'cards' ); ?>
                 </div>
                 
-                <?php get_template_part( 'template-parts/news', 'cards' ); ?>
-            </div>
-        </section>
-    <?php endif; ?>
-    
-    <?php
-    /**
-     * Upcoming Events Section
-     * Display next events from Events CPT
-     */
-    $events_count = get_theme_mod( 'vk4wip_events_count', 5 );
-    if ( $events_count > 0 ) :
-    ?>
-        <section class="events-section section-padding bg-light">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title"><?php esc_html_e( 'Upcoming Events', 'vk4wip-theme' ); ?></h2>
-                    <a href="<?php echo esc_url( home_url( '/events' ) ); ?>" class="section-link">
-                        <?php esc_html_e( 'View Calendar', 'vk4wip-theme' ); ?>
-                        <span class="arrow">→</span>
-                    </a>
+                <div class="events-column">
+                    <div class="section-header">
+                        <h2 class="section-title"><?php esc_html_e( 'UPCOMING EVENTS', 'vk4wip-theme' ); ?></h2>
+                        <a href="<?php echo esc_url( home_url( '/events' ) ); ?>" class="section-link">
+                            <?php esc_html_e( 'View Calendar', 'vk4wip-theme' ); ?>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                    <p class="section-subtitle"><?php esc_html_e( 'MEETINGS · NETS · SOCIAL', 'vk4wip-theme' ); ?></p>
+                    
+                    <?php get_template_part( 'template-parts/events', 'list' ); ?>
                 </div>
-                
-                <?php get_template_part( 'template-parts/events', 'list' ); ?>
             </div>
-        </section>
-    <?php endif; ?>
+        </div>
+    </section>
     
     <?php
     /**
@@ -89,7 +81,7 @@ get_header();
     
     <?php
     /**
-     * Repeaters Quick Info Section
+     * Repeaters & Nets Section
      * Display key repeater information
      */
     if ( get_theme_mod( 'vk4wip_show_repeaters', true ) ) :
@@ -97,9 +89,9 @@ get_header();
         <section class="repeaters-section section-padding bg-dark">
             <div class="container">
                 <div class="section-header centered light">
-                    <h2 class="section-title"><?php esc_html_e( 'Our Repeaters', 'vk4wip-theme' ); ?></h2>
+                    <h2 class="section-title"><?php esc_html_e( 'REPEATERS & NETS', 'vk4wip-theme' ); ?></h2>
                     <p class="section-description">
-                        <?php esc_html_e( 'Access our extensive repeater network across Southeast Queensland', 'vk4wip-theme' ); ?>
+                        <?php esc_html_e( 'OPERATIONAL SERVICES ACROSS THE DISTRICT', 'vk4wip-theme' ); ?>
                     </p>
                 </div>
                 
@@ -107,7 +99,10 @@ get_header();
                 
                 <div class="section-cta">
                     <a href="<?php echo esc_url( home_url( '/repeaters' ) ); ?>" class="btn btn-primary btn-large">
-                        <?php esc_html_e( 'View Full Repeater Directory', 'vk4wip-theme' ); ?>
+                        <?php esc_html_e( 'FULL REPEATER INFO', 'vk4wip-theme' ); ?>
+                    </a>
+                    <a href="<?php echo esc_url( home_url( '/repeater-maintenance' ) ); ?>" class="btn btn-secondary btn-large">
+                        <?php esc_html_e( 'REPEATER MAINTENANCE & SITE PHOTOS', 'vk4wip-theme' ); ?>
                     </a>
                 </div>
             </div>

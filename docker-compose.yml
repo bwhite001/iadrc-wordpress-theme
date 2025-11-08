@@ -5,6 +5,7 @@ services:
     container_name: vk4wip-db
     hostname: vk4wip-db
     restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --ssl=0
     environment:
       MYSQL_ROOT_PASSWORD: wordpress_root_pass
       MYSQL_DATABASE: wordpress
@@ -91,6 +92,7 @@ services:
       - ./_build/wordpress_data:/var/www/html
       - ./docker/scripts:/scripts:ro
       - ./_build/wpcli_cache:/var/www/.wp-cli/cache
+      - ./docker/mysql-client.cnf:/etc/my.cnf.d/mysql-client.cnf:ro
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress

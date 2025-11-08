@@ -12,18 +12,16 @@
     <div class="explore-card">
         <div class="explore-card-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
             </svg>
         </div>
-        <h3 class="explore-card-title"><?php esc_html_e( 'Membership', 'vk4wip-theme' ); ?></h3>
+        <h3 class="explore-card-title"><?php esc_html_e( 'SILENT KEY MEMORIAL BOARD', 'vk4wip-theme' ); ?></h3>
         <p class="explore-card-description">
-            <?php esc_html_e( 'Join our club and become part of the amateur radio community in Ipswich', 'vk4wip-theme' ); ?>
+            <?php esc_html_e( 'Honouring members who became Silent Keys - remembering callsigns and stories', 'vk4wip-theme' ); ?>
         </p>
-        <a href="<?php echo esc_url( home_url( '/membership' ) ); ?>" class="explore-card-link">
-            <?php esc_html_e( 'Learn More', 'vk4wip-theme' ); ?>
+        <a href="<?php echo esc_url( home_url( '/silent-key' ) ); ?>" class="explore-card-link">
+            <?php esc_html_e( 'Learn more', 'vk4wip-theme' ); ?>
             <span class="arrow">→</span>
         </a>
     </div>
@@ -35,12 +33,12 @@
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
             </svg>
         </div>
-        <h3 class="explore-card-title"><?php esc_html_e( 'Training', 'vk4wip-theme' ); ?></h3>
+        <h3 class="explore-card-title"><?php esc_html_e( 'CLUB HISTORY', 'vk4wip-theme' ); ?></h3>
         <p class="explore-card-description">
-            <?php esc_html_e( 'Get your amateur radio license with our Foundation, Standard, and Advanced courses', 'vk4wip-theme' ); ?>
+            <?php esc_html_e( 'From 1962 to today — photos, milestones and projects that shaped VK4WIP', 'vk4wip-theme' ); ?>
         </p>
-        <a href="<?php echo esc_url( home_url( '/training' ) ); ?>" class="explore-card-link">
-            <?php esc_html_e( 'View Courses', 'vk4wip-theme' ); ?>
+        <a href="<?php echo esc_url( home_url( '/history' ) ); ?>" class="explore-card-link">
+            <?php esc_html_e( 'Read the history', 'vk4wip-theme' ); ?>
             <span class="arrow">→</span>
         </a>
     </div>
@@ -48,17 +46,53 @@
     <div class="explore-card">
         <div class="explore-card-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
         </div>
-        <h3 class="explore-card-title"><?php esc_html_e( 'Repeaters', 'vk4wip-theme' ); ?></h3>
+        <h3 class="explore-card-title"><?php esc_html_e( 'MEMBERSHIP', 'vk4wip-theme' ); ?></h3>
         <p class="explore-card-description">
-            <?php esc_html_e( 'Access our extensive repeater network covering Southeast Queensland', 'vk4wip-theme' ); ?>
+            <?php esc_html_e( 'Join the club, support our repeaters and take part in events and nets', 'vk4wip-theme' ); ?>
         </p>
-        <a href="<?php echo esc_url( home_url( '/repeaters' ) ); ?>" class="explore-card-link">
-            <?php esc_html_e( 'View Directory', 'vk4wip-theme' ); ?>
+        <a href="<?php echo esc_url( home_url( '/membership' ) ); ?>" class="explore-card-link">
+            <?php esc_html_e( 'Join now', 'vk4wip-theme' ); ?>
+            <span class="arrow">→</span>
+        </a>
+    </div>
+    
+    <div class="explore-card">
+        <div class="explore-card-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+        </div>
+        <h3 class="explore-card-title"><?php esc_html_e( 'EQUIPMENT LOAN SCHEME', 'vk4wip-theme' ); ?></h3>
+        <p class="explore-card-description">
+            <?php esc_html_e( 'Get on air with loan gear for training, club events and nets', 'vk4wip-theme' ); ?>
+        </p>
+        <a href="<?php echo esc_url( home_url( '/equipment-loan' ) ); ?>" class="explore-card-link">
+            <?php esc_html_e( 'See how it works', 'vk4wip-theme' ); ?>
+            <span class="arrow">→</span>
+        </a>
+    </div>
+    
+    <div class="explore-card">
+        <div class="explore-card-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
+        </div>
+        <h3 class="explore-card-title"><?php esc_html_e( 'CLUB SPONSORS', 'vk4wip-theme' ); ?></h3>
+        <p class="explore-card-description">
+            <?php esc_html_e( 'Thanks to sponsors who help keep the club and repeaters on air', 'vk4wip-theme' ); ?>
+        </p>
+        <a href="<?php echo esc_url( home_url( '/sponsors' ) ); ?>" class="explore-card-link">
+            <?php esc_html_e( 'Meet our sponsors', 'vk4wip-theme' ); ?>
             <span class="arrow">→</span>
         </a>
     </div>

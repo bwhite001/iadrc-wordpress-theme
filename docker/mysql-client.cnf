@@ -1,0 +1,11 @@
+[client]
+skip-ssl
+
+[mysql]
+skip-ssl
+
+[mysqldump]
+skip-ssl
+
+[mysqlcheck]
+skip-ssl
