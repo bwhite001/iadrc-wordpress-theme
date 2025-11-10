@@ -1,0 +1,301 @@
+# Copilot Instructions for VK4WIP WordPress Theme
+
+## Project Overview
+- This repo contains a custom WordPress theme for the VK4WIP Amateur Radio Club, developed for club use and public release.
+- The main theme code is in `vk4wip-theme/`, with assets, templates, and PHP logic split into subfolders.
+- Development and testing are containerized using Docker; see `DOCKER_GUIDE.md` and `README.md` for setup.
+
+## Docker Implementation for AI Agents
+
+### Environment Setup
+When working with this project, AI agents should:
+1. **Check Docker status first**: Use `docker-compose ps` or `make status` to verify if containers are running
+2. **Start environment**: Use `make start` or `docker-compose up -d` to launch the development environment
+3. **Wait for readiness**: WordPress needs ~15 seconds to initialize after starting
+4. **Verify access**: Confirm WordPress is accessible at http://localhost:8080
+
+### Container Architecture
+The project uses 4 Docker services:
+- **wordpress**: Main WordPress instance (port 8080) with theme live-mounted at `/var/www/html/wp-content/themes/vk4wip-theme`
+- **db**: MySQL 8.0 database with persistent storage
+- **phpmyadmin**: Database management UI (port 8081)
+- **wpcli**: WP-CLI for command-line operations (run-only, no persistent container)
+
+### Key Docker Commands for Agents
+
+#### Starting/Stopping
+```bash
+make start          # Start all services
+make stop           # Stop services (keeps data)
+make restart        # Restart services
+make status         # Check container status
+```
+
+#### Theme Operations
+```bash
+make theme-activate # Activate the VK4WIP theme
+make theme-list     # List all installed themes
+```
+
+#### Plugin Management
+```bash
+make plugin-install # Install ACF, Elementor, Yoast SEO
+make plugin-list    # List installed plugins
+```
+
+#### Debugging & Logs
+```bash
+make logs           # View WordPress logs (real-time)
+make logs-all       # View all container logs
+make debug-on       # Enable WP_DEBUG mode
+make debug-off      # Disable WP_DEBUG mode
+
+# Direct log access
+docker-compose exec wordpress tail -f /var/www/html/wp-content/debug.log
+```
+
+#### Database Operations
+```bash
+make db-export                              # Export database to backups/
+make db-import FILE=backups/backup.sql      # Import database from file
+```
+
+#### WP-CLI Commands
+```bash
+make wp ARGS="user list"                    # List users
+make wp ARGS="post list"                    # List posts
+make wp ARGS="cache flush"                  # Clear cache
+make wp ARGS="rewrite flush"                # Fix permalinks
+make wp ARGS="theme list"                   # List themes
+make wp ARGS="plugin list"                  # List plugins
+```
+
+#### Shell Access
+```bash
+make shell          # Open bash in WordPress container
+docker-compose exec wordpress bash
+```
+
+### Live Development Workflow
+**Important**: Theme files are live-mounted, meaning:
+- Changes to files in `vk4wip-theme/` are immediately reflected in the container
+- No rebuild or restart needed for PHP/CSS/JS changes
+- Simply edit files and refresh the browser to see changes
+- This applies to all files: PHP templates, CSS, JavaScript, images
+
+### Agent Workflow Patterns
+
+#### Pattern 1: Making Theme Changes
+```bash
+# 1. Ensure environment is running
+make status
+
+# 2. If not running, start it
+make start
+
+# 3. Make changes to theme files (they're live-mounted)
+# Edit vk4wip-theme/style.css, functions.php, etc.
+
+# 4. Test changes by refreshing browser at http://localhost:8080
+
+# 5. Check for errors if needed
+make logs
+```
+
+#### Pattern 2: Testing New Features
+```bash
+# 1. Start environment
+make start
+
+# 2. Activate theme (if not already active)
+make theme-activate
+
+# 3. Make code changes
+
+# 4. Use browser_action tool to test:
+#    - Launch browser at http://localhost:8080
+#    - Navigate and interact with the site
+#    - Verify changes work correctly
+#    - Close browser when done
+
+# 5. Check debug logs if issues arise
+make debug-on
+make logs
+```
+
+#### Pattern 3: Plugin Development/Testing
+```bash
+# 1. Install required plugins
+make plugin-install
+
+# 2. Verify plugin activation
+make plugin-list
+
+# 3. Test plugin integration with theme
+
+# 4. Check for conflicts
+make logs
+```
+
+#### Pattern 4: Database Work
+```bash
+# 1. Backup before major changes
+make db-export
+
+# 2. Make changes (custom post types, fields, etc.)
+
+# 3. Test changes
+
+# 4. If needed, restore backup
+make db-import FILE=backups/backup-YYYYMMDD-HHMMSS.sql
+```
+
+### Troubleshooting for Agents
+
+#### Container Not Starting
+```bash
+# Check what's using port 8080
+lsof -i :8080
+
+# View detailed logs
+docker-compose logs wordpress
+
+# Rebuild if needed
+docker-compose down
+docker-compose up -d --build
+```
+
+#### Theme Not Appearing
+```bash
+# Verify theme is mounted
+docker-compose exec wordpress ls -la /var/www/html/wp-content/themes/
+
+# Should show vk4wip-theme directory
+# If missing, check docker-compose.yml volumes configuration
+
+# Reactivate theme
+make theme-activate
+```
+
+#### Permission Issues
+```bash
+# Fix permissions on host
+sudo chown -R $USER:$USER vk4wip-theme/
+
+# Fix permissions in container
+docker-compose exec wordpress chown -R www-data:www-data /var/www/html/wp-content/themes/vk4wip-theme
+```
+
+#### WordPress Not Responding
+```bash
+# Check container health
+make status
+
+# Restart services
+make restart
+
+# Check database connectivity
+docker-compose exec db mysqladmin ping -h localhost -u root -pwordpress_root_pass
+```
+
+### Important Notes for Agents
+
+1. **Never use `make clean`** unless explicitly requested - it deletes all data
+2. **Always check container status** before executing commands
+3. **Wait for WordPress initialization** (~15 seconds) after `make start`
+4. **Use live-mounted files** - no need to copy files into containers
+5. **Check logs first** when troubleshooting issues
+6. **Backup database** before major structural changes
+7. **Port conflicts**: If 8080 is in use, check docker-compose.yml to change ports
+8. **Debug mode**: Enable with `make debug-on` for detailed error logging
+
+### Testing Checklist for Agents
+
+Before completing theme-related tasks:
+- [ ] Verify containers are running: `make status`
+- [ ] Confirm theme is activated: `make theme-list`
+- [ ] Check for PHP errors: `make logs`
+- [ ] Test in browser at http://localhost:8080
+- [ ] Verify responsive design (if UI changes made)
+- [ ] Check debug log if issues: `docker-compose exec wordpress tail -f /var/www/html/wp-content/debug.log`
+- [ ] Confirm no console errors (use browser_action tool)
+
+### Quick Reference: Common Agent Tasks
+
+| Task | Command |
+|------|---------|
+| Start development | `make start` |
+| Stop development | `make stop` |
+| View logs | `make logs` |
+| Activate theme | `make theme-activate` |
+| Install plugins | `make plugin-install` |
+| Enable debugging | `make debug-on` |
+| Export database | `make db-export` |
+| Run WP-CLI | `make wp ARGS="command"` |
+| Shell access | `make shell` |
+| Check status | `make status` |
+
+### File Locations in Container
+
+- **Theme root**: `/var/www/html/wp-content/themes/vk4wip-theme/`
+- **Debug log**: `/var/www/html/wp-content/debug.log`
+- **WordPress root**: `/var/www/html/`
+- **Uploads**: `/var/www/html/wp-content/uploads/`
+- **Plugins**: `/var/www/html/wp-content/plugins/`
+
+### Environment Variables (docker-compose.yml)
+
+**Database credentials** (development only):
+- Database: `wordpress`
+- User: `wordpress`
+- Password: `wordpress_pass`
+- Root password: `wordpress_root_pass`
+
+**⚠️ Never use these credentials in production!**
+
+## Architecture & Key Files
+- **Theme root:** `vk4wip-theme/` (all theme code)
+  - `assets/` (CSS, JS, images)
+  - `inc/` (custom fields, post types, customizer, theme functions)
+  - `template-parts/` (modular PHP templates)
+  - `style.css` (theme metadata, version, main styles)
+- **Build/Release:**
+  - GitHub Actions workflows in `.github/workflows/` automate building and packaging the theme on push/tag.
+  - Release zip is created from a cleaned theme directory, excluding dev files (see workflow YAML for exclusions).
+
+## Developer Workflow
+- **Local development:**
+  - Use Docker (`make start`, `make stop`, etc.) for a reproducible WP environment.
+  - Activate theme: `make theme-activate`
+  - Install plugins: `make plugin-install`
+  - View logs: `make logs` or `docker-compose exec wordpress tail -f /var/www/html/wp-content/debug.log`
+- **Testing:**
+  - Changes are live after editing theme files and refreshing the browser.
+  - Responsive and accessibility testing is required (WCAG 2.1 AA compliance).
+- **Build/Release:**
+  - On push to `main` or tag (`vX.X.X`), workflows build and upload a zip artifact.
+  - To release: bump version in `style.css`, commit, push, create tag, push tag.
+
+## Conventions & Patterns
+- **Custom post types and fields:** Defined in `inc/custom-post-types.php` and `inc/custom-fields.php`.
+- **Templates:** Use modular PHP files in `template-parts/` for homepage sections, events, news, etc.
+- **CSS:** Organized by component in `assets/css/`; use custom properties for theming.
+- **Accessibility:** All templates must use semantic HTML, ARIA roles, and visible focus indicators.
+- **No parent theme dependency** (as of Phase 2+).
+
+## Integration Points
+- **Plugins:** Required plugins installed via WP-CLI in Docker (see `README.md`).
+- **Customizer:** Theme options exposed via `inc/customizer.php`.
+- **External assets:** Fonts from Google Fonts, images in `assets/images/`.
+
+## Troubleshooting & Tips
+- If build fails, check workflow logs in GitHub Actions tab.
+- For version mismatch, ensure `style.css` version matches release tag.
+- Clean up dev files before release (see workflow YAML for exclusions).
+
+## References
+- See `README.md`, `DOCKER_GUIDE.md`, and `GITHUB_WORKFLOW_GUIDE.md` for full documentation and workflow details.
+- For support, see contact info in `README.md`.
+
+---
+**Update this file as project conventions evolve.**
